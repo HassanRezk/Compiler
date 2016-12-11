@@ -24,10 +24,11 @@ public class Token {
     private final Pattern strings = Pattern.compile("'.*'|\".*\"");
     private final Pattern booleans = Pattern.compile("true|false");
     private final Pattern identifiers = Pattern.compile("[a-zA-Z_][a-zA-Z0-9_]*");
-    private final Pattern operators = Pattern.compile("(\\|\\|)|(&&)|(\\*=)|(/=)|(\\+=)|(-=)|(>=)|(<=)|(==)|(!=)|(\\+)|(-)|(\\*)|(/)|(%)|(<)|(>)|(=)|(&)|(\\|)");
+    private final Pattern operators = Pattern.compile("(\\|\\|)|(&&)|(\\*=)|(/=)|(\\+=)|(\\+\\+)|(\\-\\-)|(-=)|(>=)|(<=)|(==)|(!=)|(\\+)|(-)|(\\*)|(/)" +
+                                                      "|(%)|(<)|(>)|(=)|(&)|(\\|)|(\\{)|(\\})|(\\()|(\\))");
     private final Pattern semicolon = Pattern.compile(";");
     private final Pattern comma = Pattern.compile("\\,");
-    private final Pattern keywords = Pattern.compile("start|int|long|float|String|char|double|boolean|else if|else|if|end");
+    private final Pattern keywords = Pattern.compile("start|int|long|float|String|char|double|boolean|else if|else|if|for|while|do|end");
 
 
     public Token(String sourceCode){
@@ -36,8 +37,8 @@ public class Token {
 
     public List<tokens> getTokens () {
         while (sourceCode.length() != 0){
-            boolean goodToken = filltokens(keywords, TokenType.KEYWORD) || filltokens(operators, TokenType.OPERATOR)
-                                || filltokens(identifiers, TokenType.IDENTIFIER) || filltokens(booleans, TokenType.BOOLEAN)
+            boolean goodToken = filltokens(keywords, TokenType.KEYWORD) || filltokens(booleans, TokenType.BOOLEAN)
+                                || filltokens(operators, TokenType.OPERATOR) || filltokens(identifiers, TokenType.IDENTIFIER)
                                 || filltokens(strings, TokenType.IDENTIFIER) || filltokens(characters, TokenType.IDENTIFIER)
                                 || filltokens(floatNumbers, TokenType.FLOAT) || filltokens(intNumbers, TokenType.INT)
                                 || filltokens(semicolon, TokenType.SEMICOLON) || filltokens(comma, TokenType.COMMA);

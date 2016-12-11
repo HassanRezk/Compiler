@@ -10,7 +10,7 @@ import java.util.List;
 public class Tokenizer {
 
     public static void main(final String[] args) {
-        Token t = new Token("start int t; t = 0; char c = 'a'; end");
+        Token t = new Token("start for(int i = 0; i< a; i++){float a = 0.3;} end");
         List<Token.tokens> tokens = t.getTokens();
 
         for(int i = 0 ; i < tokens.size(); i++) {
