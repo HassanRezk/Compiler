@@ -1,0 +1,8 @@
+start
+    int t;
+    t = 0;
+    char c = 'a';
+    if(c == a) {
+        c = '5';
+    }
+end

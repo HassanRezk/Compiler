@@ -1,4 +1,4 @@
-package tokenizer;
+package test;
 
 /**
  * Created by Hammam on 12/12/2016.
