@@ -23,9 +23,9 @@ public class Tokenizer {
                                                      "|^for\\b|^foreach\\b|^do\\b|^while\\b|^end");
     private final Pattern identifiers = Pattern.compile("[a-zA-Z0-9_]+");
     private final Pattern operators = Pattern.compile("[\\*|/|\\+|\\-|%|>|<|=|~|!|&|\\|]+");
-    private final Pattern parentheses = Pattern.compile("\\(\\b|\\)\\b");
-    private final Pattern squareBrackets = Pattern.compile("\\[\\b|\\]\\b");
-    private final Pattern curlyBrackets = Pattern.compile("\\{\\b|\\}\\b");
+    private final Pattern parentheses = Pattern.compile("\\(|\\)");
+    private final Pattern squareBrackets = Pattern.compile("\\[|\\]");
+    private final Pattern curlyBrackets = Pattern.compile("\\{|\\}");
     private final Pattern semicolon = Pattern.compile(";");
     private final Pattern comma = Pattern.compile("\\,");
     private final Pattern comment = Pattern.compile("^//+");
