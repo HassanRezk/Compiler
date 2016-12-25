@@ -5,19 +5,19 @@ package lexical_analysis;
  */
 public final class TokenError {
 
-    private final int lineNumber;
+    private int lineNumber;
     private final Character illegalCharacter;
 
-    public TokenError(final int lineNumber, final Character illegalCharacter) {
-        this.lineNumber = lineNumber;
+    public TokenError(final Character illegalCharacter) {
         this.illegalCharacter = illegalCharacter;
     }
 
-    public int getLineNumber() {
-        return lineNumber;
+    public void setLineNumber(int lineNumber) {
+        this.lineNumber = lineNumber;
     }
 
-    public Character getIllegalCharacter() {
-        return illegalCharacter;
+    @Override
+    public String toString() {
+        return "Line Number# " + lineNumber + " Illegal Character = " + illegalCharacter;
     }
 }

@@ -51,7 +51,8 @@ public final class DFA {
                 continue;
             }
             if(dfaRoot == this.dfaRoot && !dfaRoot.isAllowedCharacter(c)) {
-                tokenErrors.add(new TokenError(i + 1, c));
+                tokenErrors.add(new TokenError(c));
+                continue;
             }
             if(dfaRoot.isChild(c)) {
                 token.append(c);
@@ -118,6 +119,7 @@ public final class DFA {
                         allowedCharacters.add(c);
                     }
                 }
+                allowedCharacters.add('_');
                 break;
             case NUMBER:
                 for(Character c : parentAllowedCharacters) {

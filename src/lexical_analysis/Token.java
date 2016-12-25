@@ -1,7 +1,5 @@
 package lexical_analysis;
 
-import java.util.regex.Pattern;
-
 /**
  * Created by Hassan on 12/10/2016.
  */

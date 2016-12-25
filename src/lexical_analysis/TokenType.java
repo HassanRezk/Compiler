@@ -1,7 +1,5 @@
 package lexical_analysis;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.List;
  */
 public enum TokenType {
     KEYWORD(Arrays.asList("int", "double", "boolean", "char", "string", "if", "else", "start", "end", "for", "while",
-            "do", "switch", "case", "true", "false")),
+            "do", "switch", "case", "true", "false", "break", "continue", "function")),
     IDENTIFIER(Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
             "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
             "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "_")),

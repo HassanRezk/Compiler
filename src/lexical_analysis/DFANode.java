@@ -1,8 +1,6 @@
 package lexical_analysis;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -64,15 +62,16 @@ public final class DFANode {
         allowedCharacters.clear();
     }
 
-    public void addCharacterToAllowedCharacters(final Character c) {
-        allowedCharacters.add(c);
-    }
-
     public boolean isAllowedCharacter(final Character c) {
         return allowedCharacters.contains(c);
     }
 
     public TokenType getTokenType() {
         return tokenType;
+    }
+
+    @Override
+    public String toString() {
+        return value + "";
     }
 }

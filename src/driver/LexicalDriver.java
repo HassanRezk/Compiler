@@ -5,8 +5,6 @@ import lexical_analysis.TokenError;
 import lexical_analysis.Tokenizer;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,7 +17,8 @@ public final class LexicalDriver {
     public static void main(final String[] args) throws IOException {
         Tokenizer tokenizer = Tokenizer.getInstance(filePath);
         List<List<Token>> tokens = tokenizer.getTokens();
-        List<List<TokenError>> tokenErrors = tokenizer.getTokenErrors();
+        List<TokenError> tokenErrors = tokenizer.getTokenErrors();
+        System.out.println("Tokens:\n");
         for(int i = 0 ; i < tokens.size() ; ++i) {
             System.out.print("line# " + (i+1) + ":\n");
             for(Token token : tokens.get(i)) {
@@ -27,6 +26,10 @@ public final class LexicalDriver {
             }
             System.out.println();
             System.out.println();
+        }
+        System.out.println("Tokens erros:\n");
+        for(TokenError tokenError : tokenErrors) {
+            System.out.println(tokenError.toString());
         }
     }
 

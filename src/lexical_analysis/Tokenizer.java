@@ -3,7 +3,6 @@ package lexical_analysis;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
 public final class Tokenizer {
 
     private static List<List<Token>> tokens;
-    private static List<List<TokenError>> tokenErrors;
+    private static List<TokenError> tokenErrors;
 
     private static final Tokenizer instance = new Tokenizer();
 
@@ -25,9 +24,12 @@ public final class Tokenizer {
         DFA dfa = DFA.getInstance();
         BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
         String line;
-        while((line = bufferedReader.readLine()) != null) {
+        for(int i = 1 ; (line = bufferedReader.readLine()) != null ; ++i) {
             tokens.add(dfa.getTokens(line));
-            tokenErrors.add(dfa.getTokenErrors());
+            for(TokenError tokenError : dfa.getTokenErrors()) {
+                tokenError.setLineNumber(i);
+                tokenErrors.add(tokenError);
+            }
         }
         return instance;
     }
@@ -36,7 +38,7 @@ public final class Tokenizer {
         return tokens;
     }
 
-    public List<List<TokenError>> getTokenErrors() {
+    public List<TokenError> getTokenErrors() {
         return tokenErrors;
     }
 }

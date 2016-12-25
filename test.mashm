@@ -1,8 +1,13 @@
 start
-    int t;
+    int _;
+    int x = 5t;
+    int x = 5 t;
     t = 0;
-    char c = 'a';
-    if(c == a) {
-        c = '5';
+    x += 3;
+    while(true) {
+        if(t == 0) {
+            t = 3
+            break;
+        }
     }
 end
