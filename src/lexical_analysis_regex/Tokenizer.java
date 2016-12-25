@@ -1,4 +1,4 @@
-package test;
+package lexical_analysis_regex;
 
 import java.util.ArrayList;
 import java.util.List;

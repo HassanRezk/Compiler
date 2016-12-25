@@ -1,4 +1,4 @@
-package test;
+package lexical_analysis_regex;
 
 /**
  * Created by Hammam on 12/12/2016.
