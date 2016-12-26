@@ -1,0 +1,197 @@
+//test 1
+/*
+put("S", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("A", false));
+                        add(new GrammarNode("B", false));
+                        add(new GrammarNode("C", false));
+                        add(new GrammarNode("D", false));
+                        add(new GrammarNode("E", false));
+
+                    }});
+                }});
+
+                put("E", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("e", true));
+                    }});
+
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("empty", true));
+                    }});
+                }});
+
+                put("A", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("a", true));
+                    }});
+
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("empty", true));
+                    }});
+                }});
+
+                put("B", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("b", true));
+                    }});
+
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("empty", true));
+                    }});
+                }});
+
+                put("C", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("c", true));
+                    }});
+                }});
+
+                put("D", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("d", true));
+                    }});
+
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("empty", true));
+                    }});
+                }});
+* */
+
+//second Test
+    /*put("S", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("B", false));
+                        add(new GrammarNode("b", true));
+                    }});
+
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("C", false));
+                        add(new GrammarNode("d", true));
+                    }});
+                }});
+
+                put("B", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("a", true));
+                        add(new GrammarNode("B", false));
+                    }});
+
+                    add(new ArrayList<GrammarNode>(){{
+
+                        add(new GrammarNode("empty", true));
+                    }});
+                }});
+
+                put("C", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("c", true));
+                        add(new GrammarNode("C", false));
+                    }});
+
+                    add(new ArrayList<GrammarNode>(){{
+
+                        add(new GrammarNode("empty", true));
+                    }});
+                }});
+                */
+
+    //third Test
+    /*put("E", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("T", false));
+                        add(new GrammarNode("Q", true));
+                    }});
+                }});
+
+                put("Q", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("+", true));
+                        add(new GrammarNode("T", false));
+                        add(new GrammarNode("Q", false));
+                    }});
+
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("empty", true));
+                    }});
+                }});
+
+                put("T", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("F", false));
+                        add(new GrammarNode("W", false));
+                    }});
+                }});
+
+                put("W", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("*", true));
+                        add(new GrammarNode("F", false));
+                        add(new GrammarNode("W", false));
+                    }});
+
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("empty", true));
+                    }});
+                }});
+
+                put("F", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("id", true));
+                    }});
+
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("(", true));
+                        add(new GrammarNode("E", false));
+                        add(new GrammarNode(")", true));
+                    }});
+                }});*/
+
+    //Fourth test
+    /*put("S", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("A", false));
+                        add(new GrammarNode("C", false));
+                        add(new GrammarNode("B", false));
+                    }});
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("C", false));
+                        add(new GrammarNode("b", true));
+                        add(new GrammarNode("B", false));
+                    }});
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("B", false));
+                        add(new GrammarNode("a", true));
+                    }});
+                }});
+
+                put("A", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("d", true));
+                        add(new GrammarNode("a", true));
+                    }});
+
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("B", false));
+                        add(new GrammarNode("C", false));
+                    }});
+                }});
+
+                put("B", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("g", true));
+                    }});
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("empty", true));
+                    }});
+                }});
+
+                put("C", new ArrayList<List<GrammarNode>>(){{
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("h", true));
+                    }});
+
+                    add(new ArrayList<GrammarNode>(){{
+                        add(new GrammarNode("empty", true));
+                    }});
+                }});*/
