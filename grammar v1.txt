@@ -1,0 +1,90 @@
+
+/// declarative for global variable
+/// directive for compilers
+
+<program> ::= {<directive> | <function_declaration> | <function_definition> | <declarative> }
+				'start main()'
+					<statements>
+				'end main'
+
+<directive> ::= { <load_statement> | <unload_statement>| <cache_statement> | <cache_out_statement> } 
+
+<load_statement> ::= 'load' '"'<filename>'"'
+<unload_statement> ::= 'load' '"'<filename>'"'
+
+
+<function_declaration> ::= 'start' <identifier> '(' <parameter> { , <parameter>} ) : type ; // as return type
+
+<function_definition> ::= 'start' <identifier> '(' <parameter> { , <parameter>} )  : type
+								<statements>
+							'end'
+
+<statements> ::= { <statement> }
+
+<statement> ::= <declarative> | <assigmnent> | <for_loop> | <while_loop> | <do_while_loop> | <switch> 
+					| <if_condition> | <return> | <continue> | <break> | <function_call>
+
+<assignment> ::= <identifier> '=' <expr> | <function_call> ';'
+
+<for_loop> ::= 'for('[<declarative> | <assignment>] ; [<expr>] ; [<expr>]')'
+					<statements>
+				'endfor'
+
+<while_loop> ::= 'while('<expr>')' 
+					<statements>
+				 'endwhile'
+
+<do_while_loop> ::= 'do'
+						<statements>
+					'end while(' <expr> ')'
+
+<if_condition> ::= 'if('<expr>')'
+						<statements>
+					endif
+
+<function_call> ::= <identifier>([identifier {, <identifier>}] )
+
+<return> ::= 'return' [<identifier> | <expr>] ; /// in case of void return
+
+<switch> ::= switch '(' <identifier> ')' 
+				{ case <value> : <statements> }
+				[ifnot : <statements>]
+			 endswitch
+
+<cache> ::= cache <identifier>
+
+<cache_out> ::= cache out <identifier> /// like inline function
+
+<continue> ::= continue;
+
+<break> ::= break;
+
+<condition> ::= <Equality> ('&&' | '||') <Equality>
+
+<Equality> ::= 	<Relational> 
+<Equality> ::=	<expr> ('==' | '!=') <Relational>
+
+<Relational> ::= 	'(' <condition> ')' 
+<Relational> ::=	<expr> ('<=' | '>=' | '<' | '>') <expr>
+
+<expr> ::= <addition>
+
+<addition> ::= <multiply>
+<addition> ::= <multiply> '+' | '-' <multiply>
+
+<multiply> ::= <logical>
+<multiply> ::= <logical> '*' | '/' | '//' | '%' <logical>
+
+<logical> ::= <identifier> | '(' <expr> ')'  | <value>
+<logical>  ::= <number> | <identifier> '&' | '^' | '|' <identifier> | <number>
+
+<number> ::= <integer> | <double>
+
+<type> ::= void | double | int | string | char
+
+<identifier> ::= <character> | '_' {<character> | <digit> | '_'}
+<integer> ::= [ + | -  ] Digit { Digit }
+<double> ::= [ + | -  ] Digit {Digit } . [  Digit { Digit  } ]  
+<character> ::= [ a-z ] [ A-Z ]
+<digit> ::=  0| 1 | 2 | 3 | 4 | 5 |  6 | 7 | 8 | 9
+<string> ::= {<character> | <digit> | <symbols>}
