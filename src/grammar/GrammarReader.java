@@ -98,6 +98,9 @@ public class GrammarReader {
                         tokenValue = token.substring(1, token.length() - 1);
                     }
                     boolean isTerminal = (token.charAt(0) == '\'') || (token.equals("EPSILON"));
+                    if(isTerminal) {
+
+                    }
                     ruleList.add(new GrammarNode(tokenValue, isTerminal));
                 }
             }
