@@ -1,0 +1,71 @@
+# <program> ::= '{' <declarative> '}' |
+				'start' 'main' '(' ')' <statements> 'end' 'main' '(' ')'
+
+# <after_parameter> ::= ',' <parameter> <after_parameter> | EPSILON
+
+# <parameter> ::= <type> <identifier>
+
+# <type> ::= 'void' | 'double' | 'int' | 'boolean'
+
+# <sign> ::= '+' | '-' | EPSILON
+
+# <integer> ::= <sign> <digits>
+
+# <double> ::= <sign> <digits> '.' <digits>
+
+# <digits> ::= <digit> | EPSILON
+
+# <identifier> ::= <character> <after_character>
+
+# <after_character> ::= <character> <after_character> | <digit> <after_character> | EPSILON
+
+# <character> ::= 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n'
+                | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' |'B'
+                | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S'
+                | 'T' | 'U' | 'V' |'W' | 'X' | 'Y' | 'Z' | '_'
+
+# <digit> ::= '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+
+# <statements> ::= <statement> | EPSILON
+
+# <statement> ::= <declarative> | <assignment> | <while_loop> | <if_condition> | <return> | <continue> | <break>
+
+# <return> ::= 'return' ';' | 'return' <identifier> ';'
+
+# <declarative> ::= <type> <identifier> <has_assignment>
+
+# <has_assignment> ::= <assignment> ';' | EPSILON
+
+# <assignment> ::= '=' <expr>
+
+# <arguments> ::= <argument> | EPSILON
+
+# <argument> ::= <identifier> <more_arguments>
+
+# <more_arguments> ::= ',' <argument> | EPSILON
+
+# <while_loop> ::= 'while' '(' <expr> ')' <statements> 'endwhile'
+
+# <if_condition> ::= 'if' '(' <expr> ')' <statements> 'endif'
+
+# <continue> ::= 'continue' ';'
+
+# <break> ::= 'break' ';'
+
+# <condition> ::= <Equality> '&&' <Equality> | <Equality> '||' <Equality>
+
+# <Equality> ::= <Relational> | <expr> '==' <Relational> | <expr> '!=' <Relational>
+
+# <Relational> ::= '(' <condition> ')' | <expr> '<=' <expr> | <expr> '>=' <expr>
+                  | <expr> '<' <expr> | <expr> '>' <expr>
+
+# <expr> ::= <addition>
+
+# <addition> ::= <multiply> '+' <multiply> | <multiply>  '-' <multiply>
+
+# <multiply> ::= <logical> | <logical> '*' <logical> | <logical> '/' <logical> | <logical> '//' <logical> | <logical> '%' <logical>
+
+# <logical> ::= <identifier> | '(' <expr> ')'  | <value> | <number> | <identifier> '&' <identifier>
+                | <identifier> '^' <identifier> | <identifier> '|' <identifier>
+
+# <number> ::= <integer> | <double>

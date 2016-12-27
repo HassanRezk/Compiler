@@ -82,6 +82,7 @@ public class GrammarReader {
                 }
                 ruleName = ruleSplitter[0].substring(1).trim();
                 ruleName = ruleName.substring(1, ruleName.length() - 1);
+                terminals.add(ruleName);
             }
             String[] tokens = ruleSplitter[ruleSplitter.length - 1].split(" ");
             for(String token : tokens) {
@@ -96,10 +97,7 @@ public class GrammarReader {
                     if(tokenValue.charAt(0) == '\'' || tokenValue.charAt(0) == '<') {
                         tokenValue = token.substring(1, token.length() - 1);
                     }
-                    boolean isTerminal = token.charAt(0) == '\'';
-                    if(!isTerminal) {
-                        terminals.add(tokenValue);
-                    }
+                    boolean isTerminal = (token.charAt(0) == '\'') || (token.equals("EPSILON"));
                     ruleList.add(new GrammarNode(tokenValue, isTerminal));
                 }
             }
