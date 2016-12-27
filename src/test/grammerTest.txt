@@ -100,7 +100,7 @@ put("S", new ArrayList<List<GrammarNode>>(){{
     /*put("E", new ArrayList<List<GrammarNode>>(){{
                     add(new ArrayList<GrammarNode>(){{
                         add(new GrammarNode("T", false));
-                        add(new GrammarNode("Q", true));
+                        add(new GrammarNode("Q", false));
                     }});
                 }});
 
