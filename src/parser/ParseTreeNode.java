@@ -7,26 +7,22 @@ import grammar.GrammarNode;
 public class ParseTreeNode {
 
 	private GrammarNode Value ; 
-	private List<ParseTreeNode> childern = new ArrayList<>();
-	
-	public ParseTreeNode(GrammarNode value ) {
-		
-		this.Value= value ;
+	private List<ParseTreeNode> children = new ArrayList<>();
 
+	public ParseTreeNode(GrammarNode value ) {
+		this.Value= value ;
 	}
-	
 
 	public GrammarNode getValue (){
-		return Value ; 
+		return Value ;
 	}
 	
-	public List <ParseTreeNode> getChildren (){
-		return children ;
+	public List<ParseTreeNode> getChildren (){
+		return children;
 	}
 	
-	public void AddChild(ParseTreeNode child) {
+	public void addChild(ParseTreeNode child) {
 		children.add(child);
-		
 	}
 
 }
