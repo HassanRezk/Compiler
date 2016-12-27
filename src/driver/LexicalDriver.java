@@ -15,9 +15,6 @@ public final class LexicalDriver {
     private static final String filePath = "lexical_analysis_regex.mashm";
 
     public static void main(final String[] args) throws IOException {
-        String t = "sfafa";
-        System.out.println(t.split("::=").length);
-        if(true) return;
         StringBuilder sb = new StringBuilder("");
         for(char c = 'a' ; c <= 'z' ; ++c) {
             sb.append("'" + c + "'" + " | ");

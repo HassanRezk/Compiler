@@ -8,9 +8,7 @@ EPSILON
 function_call -> identifier '(' arguments ')' 
 
 ##################################################################
-while_loop -> 'while' '(' expr ')' 
-statements 
-'endwhile' 
+while_loop -> 'while' '(' expr ')' statements 'endwhile' 
 
 ##################################################################
 after_parameter -> ',' parameter after_parameter 
@@ -61,7 +59,7 @@ character -> 'a'
 'l' 
 'm' 
 'n' 
-| 'o' 
+'o' 
 'p' 
 'q' 
 'r' 
@@ -74,19 +72,29 @@ character -> 'a'
 'y' 
 'z' 
 'A' 
-|'C' 
-|'E' 
-|'G' 
-|'I' 
-|'K' 
-|'M' 
-|'O' 
-|'Q' 
-|'S' 
-|'T' 
-|'V' 
-|'X' 
-|'Z' 
+'C' 
+'D' 
+'E' 
+'F' 
+'G' 
+'H' 
+'I' 
+'J' 
+'K' 
+'L' 
+'M' 
+'N' 
+'O' 
+'P' 
+'Q' 
+'R' 
+'S' 
+'T' 
+'U' 
+'V' 
+'X' 
+'Y' 
+'Z' 
 '_' 
 
 ##################################################################
@@ -104,7 +112,7 @@ assigmnent
 for_loop 
 while_loop 
 do_while_loop 
-| if_condition 
+if_condition 
 return 
 continue 
 break 
@@ -155,9 +163,7 @@ digit -> '0'
 '9' 
 
 ##################################################################
-if_condition -> 'if' '(' expr ')' 
-statements 
-'endif' 
+if_condition -> 'if' '(' expr ')' statements 'endif' 
 
 ##################################################################
 addition -> multiply '+' multiply 
@@ -167,10 +173,8 @@ multiply '-' multiply
 identifier -> character after_character 
 
 ##################################################################
-do_while_loop -> 'do' 
-statements 
-statements 'continue' ';' 
-'end' 'while' '(' expr ')' 
+do_while_loop -> 'do' statements 
+statements 'continue' ';' 'end' 'while' '(' expr ')' ';' 
 
 ##################################################################
 break -> 'break' ';' 
@@ -186,10 +190,10 @@ function_call
 load_statement -> 'load' '"' filename '"' ';' 
 
 ##################################################################
-Relational -> 	'(' condition ')' 
+Relational -> '(' condition ')' 
 expr '<=' expr 
 expr '>=' expr 
-| expr '<' expr 
+expr '<' expr 
 expr '>' expr 
 
 ##################################################################
@@ -202,7 +206,7 @@ logical -> identifier
 value 
 number 
 identifier '&' identifier 
-| identifier '^' identifier 
+identifier '^' identifier 
 identifier '|' identifier 
 
 ##################################################################

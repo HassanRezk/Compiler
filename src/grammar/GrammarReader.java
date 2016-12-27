@@ -1,9 +1,5 @@
 package grammar;
 
-import com.sun.org.apache.xerces.internal.xni.grammars.Grammar;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
 
@@ -95,7 +91,7 @@ public class GrammarReader {
                 if(token.charAt(0) == '|' && !ruleList.isEmpty()) {
                     rulesList.add(ruleList);
                     ruleList = new ArrayList<>();
-                } else {
+                } else if(token.charAt(0) != '|') {
                     String tokenValue = token;
                     if(tokenValue.charAt(0) == '\'' || tokenValue.charAt(0) == '<') {
                         tokenValue = token.substring(1, token.length() - 1);
