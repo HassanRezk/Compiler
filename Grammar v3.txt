@@ -1,9 +1,5 @@
-# <program> ::= '{' <declarative> '}' |
+# <program> ::= '{' <declaration> '}' |
 				'start' 'main' '(' ')' <statements> 'end' 'main' '(' ')'
-
-# <after_parameter> ::= ',' <parameter> <after_parameter> | EPSILON
-
-# <parameter> ::= <type> <identifier>
 
 # <type> ::= 'void' | 'double' | 'int' | 'boolean'
 
@@ -28,29 +24,19 @@
 
 # <statements> ::= <statement> | EPSILON
 
-# <statement> ::= <declarative> | <assignment> | <while_loop> | <if_condition> | <return> | <continue> | <break>
+# <statement> ::= <declaration> | <assignment> | <while_loop> | <if_condition> | <return_statement> | 'continue' | 'break'
 
-# <return> ::= 'return' ';' | 'return' <identifier> ';'
+# <return_statement> ::= 'return' ';' | 'return' <identifier> ';'
 
-# <declarative> ::= <type> <identifier> <has_assignment>
+# <declaration> ::= <type> <identifier> <has_assignment>
 
 # <has_assignment> ::= <assignment> ';' | EPSILON
 
 # <assignment> ::= '=' <expr>
 
-# <arguments> ::= <argument> | EPSILON
+# <while_loop> ::= 'while' '(' <condition> ')' <statements> 'endwhile'
 
-# <argument> ::= <identifier> <more_arguments>
-
-# <more_arguments> ::= ',' <argument> | EPSILON
-
-# <while_loop> ::= 'while' '(' <expr> ')' <statements> 'endwhile'
-
-# <if_condition> ::= 'if' '(' <expr> ')' <statements> 'endif'
-
-# <continue> ::= 'continue' ';'
-
-# <break> ::= 'break' ';'
+# <if_condition> ::= 'if' '(' <condition> ')' <statements> 'endif'
 
 # <condition> ::= <Equality> '&&' <Equality> | <Equality> '||' <Equality>
 
