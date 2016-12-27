@@ -5,10 +5,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Hassan on 12/25/2016.
@@ -21,6 +18,8 @@ public class GrammarReader {
 
     private static Map<String, List<List<GrammarNode>>> rules;
 
+    private static Set<String> terminals;
+
     private static StringBuilder printer;
 
     private GrammarReader() {}
@@ -30,11 +29,18 @@ public class GrammarReader {
         rules = new HashMap<>();
         createRules();
         printer = createPrinter();
+        terminals = new HashSet<>();
         return instance;
     }
 
     public Map<String, List<List<GrammarNode>>> getRules() {
         return rules;
+    }
+
+    public List<String> getNonTerminals() {
+        ArrayList<String> terminalList = new ArrayList<>();
+        terminalList.addAll(terminals);
+        return terminalList;
     }
 
     @Override
@@ -59,7 +65,7 @@ public class GrammarReader {
     }
 
     private static void createRules() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("Grammar v2.txt"));
+        BufferedReader br = new BufferedReader(new FileReader(grammarFilePath));
         String line;
         String ruleName = "";
         List<List<GrammarNode>> rulesList = new ArrayList<>();
@@ -75,15 +81,6 @@ public class GrammarReader {
                     if(rules.containsKey(ruleName)) {
                         throw new IllegalArgumentException("Invalid rule statement.");
                     }
-                    /*System.out.println(ruleName + " ::\n\n");
-                    for(List<GrammarNode> statement : rulesList) {
-                        for(GrammarNode grammarNode : statement) {
-                            System.out.print(grammarNode.toString() + " ");
-                        }
-                        System.out.println();
-                    }
-                    System.out.println();
-                    System.out.println();*/
                     rules.put(ruleName, rulesList);
                     rulesList = new ArrayList<>();
                 }
@@ -97,10 +94,6 @@ public class GrammarReader {
                 }
                 if(token.charAt(0) == '|' && !ruleList.isEmpty()) {
                     rulesList.add(ruleList);
-                    for(GrammarNode grammarNode : ruleList) {
-                        System.out.print(grammarNode.toString() + " ");
-                    }
-                    System.out.println();
                     ruleList = new ArrayList<>();
                 } else {
                     String tokenValue = token;
@@ -108,6 +101,9 @@ public class GrammarReader {
                         tokenValue = token.substring(1, token.length() - 1);
                     }
                     boolean isTerminal = token.charAt(0) == '\'';
+                    if(isTerminal) {
+                        terminals.add(tokenValue);
+                    }
                     ruleList.add(new GrammarNode(tokenValue, isTerminal));
                 }
             }
