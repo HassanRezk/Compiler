@@ -1,7 +1,12 @@
 package grammar;
 
+import com.sun.org.apache.xerces.internal.xni.grammars.Grammar;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,14 +17,105 @@ public class GrammarReader {
 
     private static final GrammarReader instance = new GrammarReader();
 
-    private  GrammarReader() {}
+    private static String grammarFilePath;
 
-    public static GrammarReader getInstance(final String filePath) {
+    private static Map<String, List<List<GrammarNode>>> rules;
+
+    private static StringBuilder printer;
+
+    private GrammarReader() {}
+
+    public static GrammarReader getInstance(final String grammarFilePath) throws IOException {
+        GrammarReader.grammarFilePath = grammarFilePath;
+        rules = new HashMap<>();
+        createRules();
+        printer = createPrinter();
         return instance;
     }
 
     public Map<String, List<List<GrammarNode>>> getRules() {
-        throw new NotImplementedException();
+        return rules;
+    }
+
+    @Override
+    public String toString() {
+        return GrammarReader.printer.toString();
+    }
+
+    private static StringBuilder createPrinter() {
+        StringBuilder sb = new StringBuilder("");
+        for(Map.Entry<String, List<List<GrammarNode>>> entry : rules.entrySet()) {
+            sb.append(entry.getKey() + " -> ");
+            List<List<GrammarNode>> value = entry.getValue();
+            for(List<GrammarNode> statement : value) {
+                for(GrammarNode grammarNode : statement) {
+                    sb.append(grammarNode.toString() + " ");
+                }
+                sb.append("\n");
+            }
+            sb.append("\n##################################################################\n");
+        }
+        return sb;
+    }
+
+    private static void createRules() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader("Grammar v2.txt"));
+        String line;
+        String ruleName = "";
+        List<List<GrammarNode>> rulesList = new ArrayList<>();
+        List<GrammarNode> ruleList = new ArrayList<>();
+        while((line = br.readLine()) != null) {
+            line = line.trim();
+            if(line.isEmpty()) {
+                continue;
+            }
+            String[] ruleSplitter = line.split("::=");
+            if(line.charAt(0) == '#') {
+                if(!ruleName.isEmpty()) {
+                    if(rules.containsKey(ruleName)) {
+                        throw new IllegalArgumentException("Invalid rule statement.");
+                    }
+                    /*System.out.println(ruleName + " ::\n\n");
+                    for(List<GrammarNode> statement : rulesList) {
+                        for(GrammarNode grammarNode : statement) {
+                            System.out.print(grammarNode.toString() + " ");
+                        }
+                        System.out.println();
+                    }
+                    System.out.println();
+                    System.out.println();*/
+                    rules.put(ruleName, rulesList);
+                    rulesList = new ArrayList<>();
+                }
+                ruleName = ruleSplitter[0].substring(1).trim();
+                ruleName = ruleName.substring(1, ruleName.length() - 1);
+            }
+            String[] tokens = ruleSplitter[ruleSplitter.length - 1].split(" ");
+            for(String token : tokens) {
+                if(token.trim().isEmpty()) {
+                    continue;
+                }
+                if(token.charAt(0) == '|' && !ruleList.isEmpty()) {
+                    rulesList.add(ruleList);
+                    for(GrammarNode grammarNode : ruleList) {
+                        System.out.print(grammarNode.toString() + " ");
+                    }
+                    System.out.println();
+                    ruleList = new ArrayList<>();
+                } else {
+                    String tokenValue = token;
+                    if(tokenValue.charAt(0) == '\'' || tokenValue.charAt(0) == '<') {
+                        tokenValue = token.substring(1, token.length() - 1);
+                    }
+                    boolean isTerminal = token.charAt(0) == '\'';
+                    ruleList.add(new GrammarNode(tokenValue, isTerminal));
+                }
+            }
+            if(!ruleList.isEmpty()) {
+                rulesList.add(ruleList);
+                ruleList = new ArrayList<>();
+            }
+        }
     }
 
 }

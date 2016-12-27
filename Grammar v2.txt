@@ -1,7 +1,5 @@
-# <program> ::= '{' <directive> | <function_declaration> | <function_definition> | <declarative> '}'
-				'start' 'main' '(' ')'
-					<statements>
-				'end' 'main' '(' ')'
+# <program> ::= '{' <directive> | <function_declaration> | <function_definition> | <declarative> '}' |
+				'start' 'main' '(' ')' <statements> 'end' 'main' '(' ')'
 
 # <directive> ::= <load_statement> | <unload_statement> | <cache_statement> | <cache_out_statement> | EPSILON
 
@@ -63,21 +61,13 @@
 
 # <more_arguments> ::= ',' <argument> | EPSILON
 
-# <for_loop> ::= 'for' '(' <declarative> ';' <expr> | EPSILON ';' <expr> ')'
-					<statements>
-				'endfor'
+# <for_loop> ::= 'for' '(' <declarative> ';' <expr> | EPSILON ';' <expr> ')' <statements> 'endfor'
 
-# <while_loop> ::= 'while' '(' <expr> ')'
-					<statements>
-				 'endwhile'
+# <while_loop> ::= 'while' '(' <expr> ')' <statements> 'endwhile'
 
-# <do_while_loop> ::= 'do'
-						<statements> | <statements> 'continue' ';'
-					'end' 'while' '(' <expr> ')'
+# <do_while_loop> ::= 'do' <statements> | <statements> 'continue' ';' 'end' 'while' '(' <expr> ')' ';'
 
-# <if_condition> ::= 'if' '(' <expr> ')'
-						<statements>
-					'endif'
+# <if_condition> ::= 'if' '(' <expr> ')' <statements> 'endif'
 
 # <continue> ::= 'continue' ';'
 
@@ -91,11 +81,10 @@
                   | <expr> '<' <expr> | <expr> '>' <expr>
 
 # <expr> ::= <addition>
-# <addition> ::= <multiply>
-# <addition> ::= <multiply> '+' | '-' <multiply>
 
-# <multiply> ::= <logical>
-# <multiply> ::= <logical> '*' <logical> | <logical> '/' <logical> | <logical> '//' <logical> | <logical> '%' <logical>
+# <addition> ::= <multiply> '+' <multiply> | <multiply>  '-' <multiply>
+
+# <multiply> ::= <logical> | <logical> '*' <logical> | <logical> '/' <logical> | <logical> '//' <logical> | <logical> '%' <logical>
 
 # <logical> ::= <identifier> | '(' <expr> ')'  | <value> | <number> | <identifier> '&' <identifier>
                 | <identifier> '^' <identifier> | <identifier> '|' <identifier>

@@ -21,4 +21,9 @@ public class GrammarNode {
         return isTerminal;
     }
 
+    @Override
+    public String toString() {
+        return (isTerminal ? "'" : "") +  value + (isTerminal ? "'" : "");
+    }
+
 }
