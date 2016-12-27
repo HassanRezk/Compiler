@@ -27,9 +27,9 @@ public class GrammarReader {
     public static GrammarReader getInstance(final String grammarFilePath) throws IOException {
         GrammarReader.grammarFilePath = grammarFilePath;
         rules = new HashMap<>();
+        terminals = new HashSet<>();
         createRules();
         printer = createPrinter();
-        terminals = new HashSet<>();
         return instance;
     }
 
