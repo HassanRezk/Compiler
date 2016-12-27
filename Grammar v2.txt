@@ -1,0 +1,103 @@
+# <program> ::= '{' <directive> | <function_declaration> | <function_definition> | <declarative> '}'
+				'start' 'main' '(' ')'
+					<statements>
+				'end' 'main' '(' ')'
+
+# <directive> ::= <load_statement> | <unload_statement> | <cache_statement> | <cache_out_statement> | EPSILON
+
+# <cache_statement> ::= 'cache' <identifier> ';'
+
+# <cache_out_statement> ::= 'cache' 'out' <identifier> ';'
+
+# <load_statement> ::= 'load' '"' <filename> '"' ';'
+
+# <unload_statement> ::= 'unload' '"' <filename> '"' ';'
+
+# <function_declaration> ::= 'start' <identifier> '(' <parameter> <after_parameter> | EPSILON ')' ':' <type> ';'
+
+# <after_parameter> ::= ',' <parameter> <after_parameter> | EPSILON
+
+# <parameter> ::= <type> <identifier>
+
+# <type> ::= 'void' | 'double' | 'int' | 'boolean'
+
+# <sign> ::= '+' | '-' | EPSILON
+
+# <integer> ::= <sign> <digits>
+
+# <double> ::= <sign> <digits> '.' <digits>
+
+# <digits> ::= <digit> | EPSILON
+
+# <identifier> ::= <character> <after_character>
+
+# <after_character> ::= <character> <after_character> | <digit> <after_character> | EPSILON
+
+# <character> ::= 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n'
+                | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' |'B'
+                |'C' |'D' |'E' |'F' |'G' |'H' |'I' |'J' |'K' |'L' |'M' |'N' |'O' |'P' |'Q' |'R' |'S'
+                |'T' |'U' |'V' |'W' |'X' |'Y' |'Z' | '_'
+
+# <digit> ::= '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+
+# <function_definition> ::= <function_declaration> <statements> 'end'
+
+# <statements> ::= <statement> | EPSILON
+
+# <statement> ::= <declarative> | <assigmnent> | <for_loop> | <while_loop> | <do_while_loop>
+					| <if_condition> | <return> | <continue> | <break> | <function_call>
+
+# <return> ::= 'return' ';' | 'return' <identifier> ';'
+
+# <declarative> ::= <type> <identifier> <has_assignment>
+
+# <has_assignment> ::= <assignment> ';' | EPSILON
+
+# <assignment> ::= '=' <expr> | <function_call>
+
+# <function_call> ::= <identifier> '(' <arguments> ')'
+
+# <arguments> ::= <argument> | EPSILON
+
+# <argument> ::= <identifier> <more_arguments>
+
+# <more_arguments> ::= ',' <argument> | EPSILON
+
+# <for_loop> ::= 'for' '(' <declarative> ';' <expr> | EPSILON ';' <expr> ')'
+					<statements>
+				'endfor'
+
+# <while_loop> ::= 'while' '(' <expr> ')'
+					<statements>
+				 'endwhile'
+
+# <do_while_loop> ::= 'do'
+						<statements> | <statements> 'continue' ';'
+					'end' 'while' '(' <expr> ')'
+
+# <if_condition> ::= 'if' '(' <expr> ')'
+						<statements>
+					'endif'
+
+# <continue> ::= 'continue' ';'
+
+# <break> ::= 'break' ';'
+
+# <condition> ::= <Equality> '&&' <Equality> | <Equality> '||' <Equality>
+
+# <Equality> ::= <Relational> | <expr> '==' <Relational> | <expr> '!=' <Relational>
+
+# <Relational> ::= 	'(' <condition> ')' | <expr> '<=' <expr> | <expr> '>=' <expr>
+                  | <expr> '<' <expr> | <expr> '>' <expr>
+
+# <expr> ::= <addition>
+# <addition> ::= <multiply>
+# <addition> ::= <multiply> '+' | '-' <multiply>
+
+# <multiply> ::= <logical>
+# <multiply> ::= <logical> '*' <logical> | <logical> '/' <logical> | <logical> '//' <logical> | <logical> '%' <logical>
+
+# <logical> ::= <identifier> | '(' <expr> ')'  | <value> | <number> | <identifier> '&' <identifier>
+                | <identifier> '^' <identifier> | <identifier> '|' <identifier>
+
+# <number> ::= <integer> | <double>

@@ -14,7 +14,7 @@ public class GrammarReader {
 
     private  GrammarReader() {}
 
-    public GrammarReader getInstance(final String filePath) {
+    public static GrammarReader getInstance(final String filePath) {
         return instance;
     }
 
