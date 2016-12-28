@@ -13,6 +13,10 @@ public final class Token {
         this.tokenValue = tokenValue;
     }
 
+    public TokenType getTokenType() {
+        return tokenType;
+    }
+
     @Override
     public String toString() {
         return "Token Type: " + this.tokenType + " Token Value: " + this.tokenValue;

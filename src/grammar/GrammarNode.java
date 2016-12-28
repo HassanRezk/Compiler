@@ -9,7 +9,13 @@ public class GrammarNode {
 
     private final String value;
     private final boolean isTerminal;
-    private TokenType tokenType;
+    private final TokenType tokenType;
+
+    public GrammarNode(final String value, final boolean isTerminal, final TokenType tokenType) {
+        this.value = value;
+        this.isTerminal = isTerminal;
+        this.tokenType = tokenType;
+    }
 
     public GrammarNode(final String value, final boolean isTerminal) {
         this.value = value;
@@ -30,11 +36,8 @@ public class GrammarNode {
         return (isTerminal ? "'" : "") +  value + (isTerminal ? "'" : "");
     }
 
-    public void setTokenType(final TokenType tokenType) {
-        this.tokenType = tokenType;
-    }
-
     public TokenType getTokenType() {
         return tokenType;
     }
+
 }

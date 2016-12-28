@@ -15,16 +15,6 @@ public final class LexicalDriver {
     private static final String filePath = "lexical_analysis_regex.mashm";
 
     public static void main(final String[] args) throws IOException {
-        StringBuilder sb = new StringBuilder("");
-        for(char c = 'a' ; c <= 'z' ; ++c) {
-            sb.append("'" + c + "'" + " | ");
-        }
-        for(char c = 'A' ; c <= 'Z' ; ++c) {
-            sb.append("'" + c + "'" + " |");
-        }
-        sb.append(" '_'");
-        System.out.println(sb.toString());
-        if(true) return;
         Tokenizer tokenizer = Tokenizer.getInstance(filePath);
         List<List<Token>> tokens = tokenizer.getTokens();
         List<TokenError> tokenErrors = tokenizer.getTokenErrors();

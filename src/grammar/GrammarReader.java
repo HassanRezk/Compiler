@@ -1,5 +1,8 @@
 package grammar;
 
+import lexical_analysis.DFA;
+import lexical_analysis.Token;
+
 import java.io.*;
 import java.util.*;
 
@@ -99,9 +102,13 @@ public class GrammarReader {
                     }
                     boolean isTerminal = (token.charAt(0) == '\'') || (token.equals("EPSILON"));
                     if(isTerminal) {
-
+                        DFA dfa = DFA.getInstance();
+                        List<Token> tokenTypeContainer = dfa.getTokens(tokenValue);
+                        ruleList.add(new GrammarNode(tokenValue, true,
+                                tokenTypeContainer.get(tokenTypeContainer.size() - 1).getTokenType()));
+                    } else {
+                        ruleList.add(new GrammarNode(tokenValue, false));
                     }
-                    ruleList.add(new GrammarNode(tokenValue, isTerminal));
                 }
             }
             if(!ruleList.isEmpty()) {
