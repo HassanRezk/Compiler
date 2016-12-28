@@ -32,7 +32,7 @@
 
 # <has_assignment> ::= <assignment> ';' | EPSILON
 
-# <assignment> ::= <sign> '=' <expr>
+# <assignment> ::= '=' <expr> | '-=' <expr> | '*=' <expr> | '/=' <expr>
 
 # <while_loop> ::= 'while' '(' <condition> ')' <statements> 'endwhile'
 
@@ -45,13 +45,13 @@
 # <Relational> ::= '(' <condition> ')' | <expr> '<=' <expr> | <expr> '>=' <expr>
                   | <expr> '<' <expr> | <expr> '>' <expr>
 
-# <expr> ::= <addition>
-
-# <addition> ::= <multiply> '+' <multiply> | <multiply>  '-' <multiply>
-
-# <multiply> ::= <logical> | <logical> '*' <logical> | <logical> '/' <logical> | <logical> '//' <logical> | <logical> '%' <logical>
-
-# <logical> ::= <identifier> | '(' <expr> ')'  | <value> | <number> | <identifier> '&' <identifier>
-                | <identifier> '^' <identifier> | <identifier> '|' <identifier>
+# <expr> ::= <identifier> '+' <identifier> | <identifier> '*' <identifier>
+           | <identifier> '/' <identifier> | <identifier> '//' <identifier>
+           | <identifier> '|' <identifier> | <identifier> '&' <identifier>
+           | <identifier> '^' <identifier> | <identifier> '%' <identifier>
+           | <number> '+' <number> | <number> '*' <number>
+           | <number> '/' <number> | <number> '//' <number>
+           | <number> '|' <number> | <number> '&' <number>
+           | <number> '^' <number> | <number> '%' <number>
 
 # <number> ::= <integer> | <double>
