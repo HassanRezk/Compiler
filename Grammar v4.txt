@@ -1,3 +1,4 @@
-# <A> ::= 'a' <A> | 'b' <B> | EPS
-# <B> ::= 'b' <C> | EPS
+# <A> ::= 'a' <A> | 'b' <B> | EPSILON
+# <B> ::= 'b' <C> | EPSILON
 # <C> ::= 'c' <C> <B>
+
