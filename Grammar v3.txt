@@ -1,5 +1,5 @@
 # <program> ::= '{' <declaration> '}' |
-				'start' 'main' '(' ')' <statements> 'end' 'main' '(' ')'
+				'start' 'main' '(' ')' <statements> 'end'
 
 # <type> ::= 'void' | 'double' | 'int' | 'boolean'
 
@@ -32,7 +32,7 @@
 
 # <has_assignment> ::= <assignment> ';' | EPSILON
 
-# <assignment> ::= '=' <expr>
+# <assignment> ::= <sign> '=' <expr>
 
 # <while_loop> ::= 'while' '(' <condition> ')' <statements> 'endwhile'
 

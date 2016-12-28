@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class LexicalDriver {
 
-    private static final String filePath = "lexical_analysis_regex.mashm";
+    private static final String filePath = "test.mashm";
 
     public static void main(final String[] args) throws IOException {
         Tokenizer tokenizer = Tokenizer.getInstance(filePath);
