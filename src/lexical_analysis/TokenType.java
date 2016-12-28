@@ -1,5 +1,6 @@
 package lexical_analysis;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +25,8 @@ public enum TokenType {
     LEFT_BRACKET(Collections.singletonList("(")),
     RIGHT_BRACKET(Collections.singletonList(")")),
     LEFT_CURLY_BRACKET(Collections.singletonList("{")),
-    RIGHT_CURLY_BRACKET(Collections.singletonList("}"));
+    RIGHT_CURLY_BRACKET(Collections.singletonList("}")),
+    BOOLEAN(Arrays.asList("true", "false"));
 
     private List<String> values;
 

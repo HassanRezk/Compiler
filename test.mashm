@@ -1,13 +1,4 @@
 start
-    int _;
-    int x = 5t;
-    int x = 5 t;
-    t = 0;
-    x += 3;
-    while(true) {
-        if(t == 0) {
-            t = 3
-            break;
-        }
-    }
+    main()
+    int x;
 end

@@ -109,7 +109,7 @@ public class GrammarReader {
                     } else {
                         ruleList.add(new GrammarNode(tokenValue, false));
                     }
-                    System.out.println(token);
+                 //   System.out.println(token);
                 }
             }
             if(!ruleList.isEmpty()) {

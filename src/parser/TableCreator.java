@@ -14,7 +14,7 @@ public class TableCreator {
     private Map<String,Set<String>> firstTable = new HashMap<>();
     private Map<String, Set<String>>  followTable = new HashMap<>();
     private Map<String, Map<String, List<GrammarNode>>> parsingTable = new HashMap<>();
-    List<String> nonTerminals;
+    List<String> nonTerminals, terminals;
 
     public TableCreator(Map<String, List<List<GrammarNode>>> rules,  List<String> nonTerminals) {
         this.rules = rules;
@@ -22,46 +22,72 @@ public class TableCreator {
         initTables(nonTerminals);
 
         for (int i = 0; i < nonTerminals.size(); ++i) {
-            buildFirstTable(nonTerminals.get(i), 0, 0);
+            buildFirstTable(nonTerminals.get(i), 0, 0, false);
         }
         for (int i = 0; i < nonTerminals.size(); ++i){
             buildFollowTable(new GrammarNode(nonTerminals.get(i), false));
         }
-
         buildParsingTable();
+        terminals = new ArrayList<String>(){
+            {
+                add("start");
+            }
+        };
+
+        /*for (int i =0; i <nonTerminals.size(); ++i) {
+            System.out.println(firstTable.get(nonTerminals.get(i)) + " \t " + nonTerminals.get(i) + " \t " + followTable.get(nonTerminals.get(i)));
+        }*/
+        /*for(int i = 0; i < nonTerminals.size(); ++i ){
+            System.out.println(nonTerminals.get(i) + ":");
+            for(int j = 0; j < terminals.size(); ++j){
+                List<GrammarNode> currentRule = parsingTable.get(nonTerminals.get(i)).get(terminals.get(j));
+                System.out.println("\t" + terminals.get(j) + ": " );
+                if(currentRule == null) continue;
+                for(int y = 0; y < currentRule.size();++y){
+                    System.out.print("\t\t" + parsingTable.get(nonTerminals.get(i)).get(terminals.get(j)).get(y).getValue());
+                }
+                System.out.println();
+            }
+        }*/
     }
 
     private void initTables(List<String> nonTerminlas) {
         for(int i = 0; i < nonTerminlas.size(); ++i ){
             firstTable.put(nonTerminlas.get(i), new HashSet<>());
-            if(i == 0 ) followTable.put(nonTerminlas.get(i), new HashSet<String>(){{add("$");}});
-            if(i > 0) followTable.put(nonTerminlas.get(i), new HashSet<>());
+            if(nonTerminlas.get(i).equals("program")) followTable.put(nonTerminlas.get(i), new HashSet<String>(){{add("$");}});
+            else followTable.put(nonTerminlas.get(i), new HashSet<>());
         }
 
     }
 
-    private void buildFirstTable(String currentNonTerminal, int currentIndex, int iteration){
+    private void buildFirstTable(String currentNonTerminal, int currentIndex, int iteration, boolean epsilonCase){
 
         List<List<GrammarNode>> currentRules = rules.get(currentNonTerminal);
         List<String> terminals = new ArrayList<>();
+       // System.out.println(currentNonTerminal + " : " + currentRules);
         for (int i = iteration; i < currentRules.size(); ++i) {
             GrammarNode currentNode = currentRules.get(i).get(currentIndex);
 
+            if(epsilonCase){
+               //System.out.println(currentNonTerminal);
+                firstTable.get(currentNonTerminal).remove("EPSILON");
+                epsilonCase = false;
+            }
             if(currentNode.isTerminal()) {
                 firstTable.get(currentNonTerminal).add(currentNode.getValue());
                 currentIndex = 0;
-                //System.out.println(currentNonTerminal + " : " + firstTable.get(currentNonTerminal));
             } else {
-                buildFirstTable(currentNode.getValue(), 0, 0);
+                //System.out.println(currentNode.getValue());
+                buildFirstTable(currentNode.getValue(), 0, 0, false);
 
-                if(firstTable.get(currentNode.getValue()).contains("empty")){
-
+                if(firstTable.get(currentNode.getValue()).contains("EPSILON")){
                     if(currentIndex + 1 >= currentRules.get(i).size()) {
+                      //  System.out.println(currentNonTerminal + " : " + currentNode.getValue() + " : " + firstTable.get(currentNode.getValue()));
                         firstTable.get(currentNonTerminal).addAll(firstTable.get(currentNode.getValue()));
                         currentIndex = 0;
                     }
                     else {
-                        buildFirstTable(currentNonTerminal, currentIndex + 1, i);
+                        buildFirstTable(currentNonTerminal, currentIndex + 1, i, true);
                         terminals.addAll(firstTable.get(currentRules.get(i).get(currentIndex).getValue()));
                         firstTable.get(currentNonTerminal).addAll(terminals);
                     }
@@ -84,12 +110,13 @@ public class TableCreator {
                         if(index + 1 == currentRule.get(j).size()){
                             followTable.get(currentNonTerminalNode.getValue()).addAll(followTable.get(nonTerminals.get(i)));
                         }else if(currentRule.get(j).get(index+1).isTerminal()){
+
                             followTable.get(currentNonTerminalNode.getValue()).add(currentRule.get(j).get(index+1).getValue());
                         } else {
                             GrammarNode nextGrammarNode = currentRule.get(j).get(index+1);
-                            if(firstTable.get(nextGrammarNode.getValue()).contains("empty")){
+                            if(firstTable.get(nextGrammarNode.getValue()).contains("EPSILON")){
                                 followTable.get(currentNonTerminalNode.getValue()).addAll(firstTable.get(nextGrammarNode.getValue()));
-                                followTable.get(currentNonTerminalNode.getValue()).remove("empty");
+                                followTable.get(currentNonTerminalNode.getValue()).remove("EPSILON");
                                 followTableEmptyCase(currentNonTerminalNode, currentRule.get(j), index + 1, nonTerminals.get(i));
                             } else {
                                 followTable.get(currentNonTerminalNode.getValue()).addAll(firstTable.get(nextGrammarNode.getValue()));
@@ -105,9 +132,9 @@ public class TableCreator {
         GrammarNode currentNode = rule.get(currentNodeIndex);
         if (currentNode.isTerminal()) {
             followTable.get(currentNonTerminalNode.getValue()).add(currentNode.getValue());
-        } else if(firstTable.get(currentNode.getValue()).contains("empty")){
+        } else if(firstTable.get(currentNode.getValue()).contains("EPSILON")){
             followTable.get(currentNonTerminalNode.getValue()).addAll(firstTable.get(currentNode.getValue()));
-            followTable.get(currentNonTerminalNode.getValue()).remove("empty");
+            followTable.get(currentNonTerminalNode.getValue()).remove("EPSILON");
             if(currentNodeIndex + 1 == rule.size()) {
                 followTable.get(currentNonTerminalNode.getValue()).addAll(followTable.get(key));
                 return;
@@ -128,13 +155,13 @@ public class TableCreator {
 
                 List<GrammarNode> currentRule = currentNonTerminalRules.get(ruleIndex);
                 for (int grammarNodeIndex = 0; grammarNodeIndex < currentRule.size(); ++grammarNodeIndex){
-                    if (currentRule.get(grammarNodeIndex).isTerminal() && !currentRule.get(grammarNodeIndex).getValue().equals("empty")) {
+                    if (currentRule.get(grammarNodeIndex).isTerminal() && !currentRule.get(grammarNodeIndex).getValue().equals("EPSILON")) {
                         GrammarNode currentTerminal = currentRule.get(grammarNodeIndex);
                         currentCarrier.put(currentTerminal.getValue(), currentRule);
                         parsingTable.put(nonTerminals.get(nonTerminalCounter), currentCarrier);
                         break;
                     }
-                    if(currentRule.get(grammarNodeIndex).getValue().equals("empty")){
+                    if(currentRule.get(grammarNodeIndex).getValue().equals("EPSILON")){
                         for( String terminal : followTable.get(nonTerminals.get(nonTerminalCounter))) {
                             currentCarrier.put(terminal, currentRule);
                         }
@@ -142,8 +169,8 @@ public class TableCreator {
                         break;
                     }
                     Set<String> firstTerminls = firstTable.get(currentRule.get(grammarNodeIndex).getValue());
-                    if(firstTerminls.contains("empty")){
-                        firstTerminls.remove("empty");
+                    if(firstTerminls.contains("EPSILON")){
+                        firstTerminls.remove("EPSILON");
                         for (String terminal : firstTerminls){
                             currentCarrier.put(terminal, currentRule);
                         }
@@ -175,10 +202,9 @@ public class TableCreator {
         if (currentNode.isTerminal()){
             currentCarrier.put(currentNode.getValue(),currentRule);
             parsingTable.put(nonTerminal, currentCarrier);
-            System.out.println(parsingTable.get(nonTerminal).get(currentNode.getValue()));
         } else {
             Set<String> firstTerminls = firstTable.get(currentNode.getValue());
-            if(firstTerminls.contains("empty")){
+            if(firstTerminls.contains("EPSILON")){
                 // firstTerminls.remove("empty");
                 for (String terminal : firstTerminls){
                     currentCarrier.put(terminal, currentRule);
