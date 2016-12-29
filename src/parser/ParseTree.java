@@ -21,10 +21,10 @@ public class ParseTree {
         this.input.push("$");
         this.ruleStack.push(new GrammarNode("$", true));
         this.ruleStack.push(new GrammarNode("program", false));
+        //this.input.addAll(Arrays.asList(input.split("\\s+")));
         buildInputStack(input);
-        root = new ParseTreeNode(new GrammarNode("program", false));
+        root = new ParseTreeNode(new GrammarNode("E", false));
         buildParseTree(root);
-        System.out.println(root.getChildren().size());
     }
 
     private void buildInputStack(List<List<Token>> input) {
@@ -53,23 +53,23 @@ public class ParseTree {
             return;
         }
         if (ruleStack.peek().getValue().equals("EPSILON")) {
-            //System.out.println("in1: " + currentNode.getValue().getValue());
             GrammarNode node = ruleStack.pop();
             currentNode.addChild(new ParseTreeNode(node));
             buildParseTree(new ParseTreeNode(node));
         } else if (ruleStack.peek().isTerminal() && ruleStack.peek().getValue().equals(input.peek())) {
-            //System.out.println("in2: " + currentNode.getValue().getValue());
             GrammarNode node = ruleStack.pop();
             currentNode.addChild(new ParseTreeNode(node));
             input.pop();
-            //System.out.println(ruleStack.peek() + " :: " + input.peek());
             buildParseTree( new ParseTreeNode(node));
         } else if (ruleStack.peek().isTerminal() && !ruleStack.peek().getValue().equals(input.peek())) {
-            System.out.println("in3: " + currentNode.getValue().getValue());
             error = true;
+            System.out.println("error");
         } else if (!ruleStack.peek().isTerminal()) {
             GrammarNode grammarNode = ruleStack.pop();
-            //System.out.println(parsingTable.get(grammarNode.getValue()).get(input.peek()));
+            if(!parsingTable.get(grammarNode.getValue()).containsKey(input.peek())){
+                error = true;
+                return;
+            }
             List<GrammarNode> rule = parsingTable.get(grammarNode.getValue()).get(input.peek());
             addRuletoStack(rule);
             buildParseTree(currentNode);
@@ -77,7 +77,6 @@ public class ParseTree {
     }
 
     private void addRuletoStack(List<GrammarNode> rule) {
-
         for(int i = rule.size() - 1 ; i >= 0; --i) {
             ruleStack.push(rule.get(i));
         }

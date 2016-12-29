@@ -10,7 +10,7 @@ import java.util.List;
  */
 public enum TokenType {
     KEYWORD(Arrays.asList("start", "main", "end", "void", "double", "int", "boolean",
-                          "return", "continue", "break", "while", "if")),
+                          "return", "continue", "break", "while", "if", "endwhile", "endif")),
     IDENTIFIER(Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
             "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
             "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "_")),

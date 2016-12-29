@@ -1,13 +1,11 @@
 # <program> ::= '{' <declaration> '}' |
 				'start' 'main' '(' ')' <statements> 'end'
 
-# <type> ::= 'double' | 'int' | 'boolean' | EPSILON
+# <type> ::= 'double' | 'int' | 'boolean'
 
 # <sign> ::= '+' | '-' | EPSILON
 
 # <integer> ::= <sign> <digits>
-
-# <doublle> ::= <sign> <digits> '.' <digits>
 
 # <digits> ::= <digit> <after_digit>
 
@@ -17,13 +15,12 @@
 
 # <after_character> ::= <character> <after_character> | <digit> <after_character> | EPSILON
 
-# <booleann> ::= 'true' | 'false'
+#<boolean> ::= 'true' | 'false'
 
 # <character> ::= 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n'
-                | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' |'B'
-                | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S'
-                | 'T' | 'U' | 'V' |'W' | 'X' | 'Y' | 'Z' | '_'
-
+                                  | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' |'B'
+                                  | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S'
+                                  | 'T' | 'U' | 'V' |'W' | 'X' | 'Y' | 'Z' | '_'
 # <digit> ::= '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
 
 # <statements> ::= <declaration> | <assignment> | <while_loop> | <if_condition> | <return_statement>  |'continue' | 'break' | EPSILON
@@ -32,17 +29,17 @@
 
 # <ident> ::= <identifier> | EPSILON
 
-# <declaration> ::= <type> <identifier> <has_assignment>
+# <declaration> ::= <type> <identifier> <has_assignment> | <identifier> <has_assignment>
 
 # <has_assignment> ::= <assignment> ';' | ';'
 
 # <assignment> ::= '=' <expr> | '-=' <expr> | '*=' <expr> | '/=' <expr>
 
-# <while_loop> ::= 'while' '(' <condition> ')' <statements> 'endwhile'
+# <while_loop> ::= 'while' '(' <condition> ')' '{' <statements> '}' 'endwhile'
 
-# <if_condition> ::= 'if' '(' <condition> ')' <statements> 'endif'
+# <if_condition> ::= 'if' '(' <condition> ')' '{' <statements> '}' 'endif'
 
-# <condition> ::= '(' <condition> ')' <conditionnn> | <expr> <conditionn>
+# <condition> ::= '(' <condition> ')' <conditionnn> | <expr> <conditionn> | <boolean>
 
 #<conditionnn> ::= '&&' '(' <condition> ')' | '||' '(' <condition> ')'
 
@@ -51,13 +48,10 @@
 
 # <expr> ::= <identifier> <iden> | <number> <num>
 
-# <iden> ::= '+' <identifier> | '*' <identifier>
-           | '/' <identifier> | '//' <identifier>
-           | '|' <identifier> | '&' <identifier>
-           | '^' <identifier> | '%' <identifier>
-# <num> ::= '+' <number> | '*' <number>
-           | '/' <number> | '//' <number>
-           | '|' <number> | '&' <number>
-           | '^' <number> | '%' <number>
+# <iden> ::= '+' <identifier> | '*' <identifier> | EPSILON
+
+# <num> ::= '+' <number> | '*' <number> | EPSILON
 
 # <number> ::= <integer> | <doublle>
+
+# <doublle> ::= '.' <digits> | EPSILON

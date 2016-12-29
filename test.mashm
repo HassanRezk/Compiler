@@ -1,4 +1,9 @@
 start
     main()
-    int x;
+    while( a == a){
+     if(false){
+        int a = 0;
+     }endi
+    }
+    endwhile
 end
