@@ -1,7 +1,7 @@
 # <program> ::= '{' <declaration> '}' |
 				'start' 'main' '(' ')' <statements> 'end'
 
-# <type> ::= 'double' | 'int' | 'boolean'
+# <type> ::= 'int' | 'boolean'
 
 # <sign> ::= '+' | '-' | EPSILON
 
@@ -23,7 +23,7 @@
                                   | 'T' | 'U' | 'V' |'W' | 'X' | 'Y' | 'Z' | '_'
 # <digit> ::= '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
 
-# <statements> ::= <declaration> | <assignment> | <while_loop> | <if_condition> | <return_statement>  |'continue' | 'break' | EPSILON
+# <statements> ::= <declaration> | <assignment> | <while_loop> | <if_condition> | <return_statement>  |'continue' | 'break'
 
 # <return_statement> ::= 'return' <ident> ';'
 
@@ -35,9 +35,9 @@
 
 # <assignment> ::= '=' <expr> | '-=' <expr> | '*=' <expr> | '/=' <expr>
 
-# <while_loop> ::= 'while' '(' <condition> ')' '{' <statements> '}' 'endwhile'
+# <while_loop> ::= 'while' '(' <condition> ')'  <statements>  'endwhile'
 
-# <if_condition> ::= 'if' '(' <condition> ')' '{' <statements> '}' 'endif'
+# <if_condition> ::= 'if' '(' <condition> ')'  <statements>  'endif'
 
 # <condition> ::= '(' <condition> ')' <conditionnn> | <expr> <conditionn> | <boolean>
 
@@ -52,6 +52,5 @@
 
 # <num> ::= '+' <number> | '*' <number> | EPSILON
 
-# <number> ::= <integer> | <doublle>
+# <number> ::= <integer>
 
-# <doublle> ::= '.' <digits> | EPSILON

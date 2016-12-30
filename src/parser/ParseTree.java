@@ -21,9 +21,8 @@ public class ParseTree {
         this.input.push("$");
         this.ruleStack.push(new GrammarNode("$", true));
         this.ruleStack.push(new GrammarNode("program", false));
-        //this.input.addAll(Arrays.asList(input.split("\\s+")));
         buildInputStack(input);
-        root = new ParseTreeNode(new GrammarNode("E", false));
+        root = new ParseTreeNode(new GrammarNode("program", false));
         buildParseTree(root);
     }
 
@@ -54,13 +53,15 @@ public class ParseTree {
         }
         if (ruleStack.peek().getValue().equals("EPSILON")) {
             GrammarNode node = ruleStack.pop();
-            currentNode.addChild(new ParseTreeNode(node));
-            buildParseTree(new ParseTreeNode(node));
+            ParseTreeNode newParseTreeNode = new ParseTreeNode(node);
+            currentNode.addChild(newParseTreeNode);
+            buildParseTree(newParseTreeNode);
         } else if (ruleStack.peek().isTerminal() && ruleStack.peek().getValue().equals(input.peek())) {
             GrammarNode node = ruleStack.pop();
-            currentNode.addChild(new ParseTreeNode(node));
+            ParseTreeNode newParseTreeNode = new ParseTreeNode(node);
+            currentNode.addChild(newParseTreeNode);
             input.pop();
-            buildParseTree( new ParseTreeNode(node));
+            buildParseTree(newParseTreeNode);
         } else if (ruleStack.peek().isTerminal() && !ruleStack.peek().getValue().equals(input.peek())) {
             error = true;
             System.out.println("error");
@@ -83,5 +84,12 @@ public class ParseTree {
     }
 
     public ParseTreeNode getTreeRoot () {return root;}
+
+    public void printParseTree(ParseTreeNode root){
+        System.out.println(root.getValue());
+        for (int i = 0; i < root.getChildren().size(); ++i){
+            printParseTree(root.getChildren().get(i));
+        }
+    }
 
 }

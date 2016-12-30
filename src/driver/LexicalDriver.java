@@ -69,77 +69,19 @@ public final class LexicalDriver {
             add("character");
             add("digit");
             add("number");
-            add("doublle");
             add("boolean");
             add("has_assignment");
             add("integer");
             add("digits");
             add("after_digit");
-            /*add("E");
-            add("E'");
-            add("T");
-            add("T'");
-            add("F");*/
         }};
-        Map<String, List<List<GrammarNode>>> x = new HashMap<String, List<List<GrammarNode>>>(){
-            {
-                put("E", new ArrayList<List<GrammarNode>>(){{
-                    add(new ArrayList<GrammarNode>(){{
-                        add(new GrammarNode("T", false));
-                        add(new GrammarNode("E'", false));
-                    }});
-                }});
 
-                put("E'", new ArrayList<List<GrammarNode>>(){{
-                    add(new ArrayList<GrammarNode>(){{
-                        add(new GrammarNode("+", true));
-                        add(new GrammarNode("T", false));
-                        add(new GrammarNode("E'", false));
-                    }});
-
-                    add(new ArrayList<GrammarNode>(){{
-                        add(new GrammarNode("EPSILON", true));
-                    }});
-                }});
-
-                put("T", new ArrayList<List<GrammarNode>>(){{
-                    add(new ArrayList<GrammarNode>(){{
-                        add(new GrammarNode("F", false));
-                        add(new GrammarNode("T'", false));
-                    }});
-                }});
-
-                put("T'", new ArrayList<List<GrammarNode>>(){{
-                    add(new ArrayList<GrammarNode>(){{
-                        add(new GrammarNode("*", true));
-                        add(new GrammarNode("F", false));
-                        add(new GrammarNode("T'", false));
-                    }});
-
-                    add(new ArrayList<GrammarNode>(){{
-                        add(new GrammarNode("EPSILON", true));
-                    }});
-                }});
-
-                put("F", new ArrayList<List<GrammarNode>>(){{
-                    add(new ArrayList<GrammarNode>(){{
-                        add(new GrammarNode("id", true));
-                    }});
-
-                    add(new ArrayList<GrammarNode>(){{
-                        add(new GrammarNode("(", true));
-                        add(new GrammarNode("E", false));
-                        add(new GrammarNode(")", true));
-                    }});
-                }});
-
-            }
-        };
 
         TableCreator tableCreator = new TableCreator(g.getRules(), nonTerminals);
-
         System.out.println("Parse tree : ");
         ParseTree parseTree = new ParseTree(tableCreator.getParsingTable(), tokens);
+        System.out.println("\nprint Parse tree : ");
+        parseTree.printParseTree(parseTree.getTreeRoot());
     }
 
 }
